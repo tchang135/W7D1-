@@ -12,7 +12,12 @@
 class User < ApplicationRecord
     validates :username, :session_token, presence: true, uniqueness: true
     validates :password_digest, presence: true
+    validates :password, allow_nil: true
     before_validation :ensure_session_token
+
+    def password
+
+    end
 
     def password=(new_pass)
         self.password_digest = BCrypt::Password.create(new_pass)
